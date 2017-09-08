@@ -1,0 +1,39 @@
+{
+  "name": "jest-electron-runner",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Stanislav Sysoev <@d4rkr00t>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/jest": "^20.0.8",
+    "electron": "^1.7.5",
+    "expect": "^21.0.0",
+    "jest": "^21.0.1",
+    "jest-circus": "^21.0.0",
+    "jest-config": "^21.0.2",
+    "jest-matchers": "^20.0.3",
+    "jest-message-util": "^21.0.0",
+    "jest-resolve": "^21.0.2",
+    "jest-runner": "^21.0.2",
+    "jest-snapshot": "^21.0.0",
+    "meow": "^3.7.0",
+    "minimist": "^1.2.0",
+    "projector-spawn": "^1.0.1",
+    "throat": "^4.1.0",
+    "ts-jest": "^21.0.0",
+    "typescript": "^2.5.2"
+  },
+  "jest": {
+    "runner": "<rootDir>/index.js",
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json"],
+    "collectCoverageFrom": ["./example/*.js"]
+  }
+}
