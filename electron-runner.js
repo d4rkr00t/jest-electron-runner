@@ -6,7 +6,7 @@ const args = minimist(process.argv.slice(2));
 function run(file, config) {
   let runner = new BrowserWindow({
     title: "Jest",
-    show: true,
+    show: false,
     contextIsolation: true
   });
 
