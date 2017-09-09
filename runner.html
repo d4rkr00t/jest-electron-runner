@@ -19,7 +19,7 @@
               window.close();
             })
             .catch(e => {
-              ipcRenderer.send('error', e.toString());
+              ipcRenderer.send('error', (e instanceof Error) ? e.message : e.toString());
               window.close();
             });
         });

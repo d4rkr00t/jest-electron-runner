@@ -53,3 +53,4 @@ module.exports = ElectronTestRunner;
 // TODO: Clean up a little bit
 // TODO: Readme and Example
 // TODO: Coverage
+// TODO: Make it work on Node 4+
