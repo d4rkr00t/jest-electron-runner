@@ -9,6 +9,10 @@ available there.
 
 ## How to use
 
+```sh
+npm install jest jest-electron-runner jest-environment-electron electron
+```
+
 ```js
 "jest": {
   "runner": "jest-electron-runner",
