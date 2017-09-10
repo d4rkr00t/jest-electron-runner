@@ -1,6 +1,6 @@
 {
   "name": "jest-environment-electron",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Jest environment for Electron",
   "main": "index.js",
   "dependencies": {
@@ -11,7 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/d4rkr00t/jest-electron-runner.git"
   },
-  "keywords": ["jest", "environment", "jest environment", "electron"],
+  "keywords": [
+    "jest",
+    "environment",
+    "jest environment",
+    "electron"
+  ],
   "author": "Stanislav Sysoev <@d4rkr00t>",
   "license": "MIT",
   "bugs": {

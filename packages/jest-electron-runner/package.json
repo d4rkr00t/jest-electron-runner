@@ -1,6 +1,6 @@
 {
   "name": "jest-electron-runner",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Jest TestRunner to run tests in Electron environment",
   "main": "index.js",
   "dependencies": {
@@ -18,7 +18,11 @@
     "type": "git",
     "url": "git+https://github.com/d4rkr00t/jest-electron-runner.git"
   },
-  "keywords": ["jest", "test runner", "electron"],
+  "keywords": [
+    "jest",
+    "test runner",
+    "electron"
+  ],
   "author": "Stanislav Sysoev <@d4rkr00t>",
   "license": "MIT",
   "bugs": {
