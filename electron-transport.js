@@ -19,6 +19,7 @@ function run(file, config) {
   });
 
   runner.loadURL(`file://${__dirname}/runner.html`);
+
   runner.webContents.on("did-finish-load", () => {
     runner.webContents.send("run", {
       file: args.file,

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Some test test with snapshot 1`] = `
+exports[`Some test #add test with snapshot 1`] = `
 Object {
   "a": 3,
   "b": 7,

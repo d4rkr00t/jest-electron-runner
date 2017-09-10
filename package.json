@@ -11,7 +11,9 @@
   "dependencies": {
     "electron": "^1.7.5",
     "jest-message-util": "^21.0.0",
+    "jest-mock": "^21.0.2",
     "jest-runner": "^21.0.2",
+    "jest-util": "^21.0.2",
     "minimist": "^1.2.0",
     "projector-spawn": "^1.0.1",
     "throat": "^4.1.0"
@@ -29,6 +31,7 @@
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json"],
-    "collectCoverageFrom": ["./example/*.js"]
+    "collectCoverageFrom": ["./example/*.js"],
+    "testEnvironment": "./electron-environment.js"
   }
 }
