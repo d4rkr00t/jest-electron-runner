@@ -4,12 +4,15 @@
   "description": "Jest TestRunner to run tests in Electron environment",
   "main": "index.js",
   "dependencies": {
-    "electron": "^1.7.5",
     "jest-message-util": "^21.0.0",
     "jest-runner": "^21.0.2",
     "minimist": "^1.2.0",
     "projector-spawn": "^1.0.1",
     "throat": "^4.1.0"
+  },
+  "peerDependencies": {
+    "electron": ">= 1.7.5",
+    "jest-environment-electron": "*"
   },
   "repository": {
     "type": "git",
