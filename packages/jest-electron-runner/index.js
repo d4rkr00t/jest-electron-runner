@@ -1,3 +1,4 @@
+const path = require("path");
 const spawn = require("projector-spawn");
 const throat = require("throat");
 const { formatResultsErrors } = require("jest-message-util");
@@ -21,7 +22,7 @@ class ElectronTestRunner {
               onStart(test)
                 .then(() =>
                   spawn("electron", [
-                    "./electron-transport.js",
+                    path.join(__dirname, "electron-transport.js"),
                     "--file",
                     test.path,
                     "--globalConfig",

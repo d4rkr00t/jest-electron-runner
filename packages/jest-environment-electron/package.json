@@ -1,18 +1,17 @@
 {
-  "name": "jest-electron-runner",
-  "private": true,
+  "name": "jest-environment-electron",
   "version": "0.0.0",
-  "devDependencies": {
-    "lerna": "^2.1.2"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Jest environment for Electron",
+  "main": "index.js",
+  "dependencies": {
+    "jest-mock": "^21.0.2",
+    "jest-util": "^21.0.2"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/d4rkr00t/jest-electron-runner.git"
   },
-  "keywords": [],
+  "keywords": ["jest", "environment", "jest environment", "electron"],
   "author": "Stanislav Sysoev <@d4rkr00t>",
   "license": "MIT",
   "bugs": {
