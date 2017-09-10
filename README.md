@@ -9,10 +9,13 @@ available there.
 
 ## How to use
 
+Install required packages:
+
 ```sh
 npm install jest jest-electron-runner jest-environment-electron electron
 ```
 
+Configure jest:
 ```js
 "jest": {
   "runner": "jest-electron-runner",
