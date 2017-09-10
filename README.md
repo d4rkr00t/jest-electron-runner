@@ -23,3 +23,7 @@ Configure jest:
   "testEnvironment": "jest-environment-electron"
 }
 ```
+
+## TODO:
+- [ ] Coverage
+- [ ] Investigate performance with a lot of test suits
