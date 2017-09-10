@@ -1,35 +1,27 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
-const minimist = require("minimist");
+const os = require("os");
+const { ipcRenderer, remote } = require("electron");
+const Runtime = require("jest-runtime");
+const runTest = require("jest-runner/build/run_test");
 
-const args = minimist(process.argv.slice(2));
-
-function run(file, config) {
-  let runner = new BrowserWindow({
-    title: "Jest",
-    show: false,
-    contextIsolation: true
-  });
-
-  ipcMain.on("test-results", (evt, result) => {
-    console.log(JSON.stringify({ type: "result", data: result }));
-  });
-
-  ipcMain.on("error", (evt, error) => {
-    console.log(JSON.stringify({ type: "error", data: error }));
-  });
-
-  runner.loadURL(`file://${__dirname}/runner.html`);
-  runner.webContents.on("did-finish-load", () => {
-    runner.webContents.send("run", {
-      file: args.file,
-      globalConfig: JSON.parse(args.globalConfig),
-      config: JSON.parse(args.config)
+ipcRenderer.on("run", (evt, { file, config, globalConfig }) => {
+  Runtime.createHasteMap(config, {
+    maxWorkers: os.cpus().length - 1,
+    watchman: globalConfig.watchman
+  })
+    .build()
+    .then(hasteMap => {
+      const resolver = Runtime.createResolver(config, hasteMap.moduleMap);
+      runTest(file, globalConfig, config, resolver)
+        .then(results => {
+          ipcRenderer.send("test-results", results);
+          window.close();
+        })
+        .catch(e => {
+          ipcRenderer.send(
+            "error",
+            e instanceof Error ? e.message : e.toString()
+          );
+          window.close();
+        });
     });
-  });
-}
-
-app.on("ready", run);
-
-app.on("window-all-closed", function() {
-  app.quit();
 });

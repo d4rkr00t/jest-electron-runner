@@ -21,7 +21,7 @@ class ElectronTestRunner {
               onStart(test)
                 .then(() =>
                   spawn("electron", [
-                    "./electron-runner.js",
+                    "./electron-transport.js",
                     "--file",
                     test.path,
                     "--globalConfig",
@@ -59,6 +59,5 @@ class CancelRun extends Error {}
 
 module.exports = ElectronTestRunner;
 
-// TODO: Clean up a little bit
 // TODO: Readme and Example
 // TODO: Coverage
