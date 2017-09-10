@@ -37,6 +37,13 @@ class ElectronTestRunner {
                   }
 
                   const data = result.data;
+                  data.failureMessage = formatResultsErrors(
+                    data.testResults,
+                    test.context.config,
+                    this._globalConfig,
+                    test.path
+                  );
+
                   return resolve(data);
                 });
             })
