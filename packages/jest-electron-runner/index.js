@@ -46,6 +46,9 @@ class ElectronTestRunner {
                   );
 
                   return resolve(data);
+                })
+                .catch(e => {
+                  reject(e);
                 });
             })
         )

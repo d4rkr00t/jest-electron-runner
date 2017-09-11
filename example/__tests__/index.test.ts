@@ -1,4 +1,4 @@
-import { add, useDOMApi } from "../index";
+import { add, useDOMApi, printMe } from "../index";
 
 describe("Some test", () => {
   describe("#add", () => {
@@ -18,6 +18,13 @@ describe("Some test", () => {
   describe("#useDOMApi", () => {
     test("should work", () => {
       expect(() => useDOMApi()).not.toThrow();
+    });
+  });
+
+  describe("#printMe", () => {
+    test("shouldn't break transport", () => {
+      const msg = "BREAK TRANSPORT!";
+      expect(printMe(msg)).toBe(msg);
     });
   });
 });
