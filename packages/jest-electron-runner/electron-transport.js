@@ -34,3 +34,7 @@ app.on("ready", run);
 app.on("window-all-closed", function() {
   app.quit();
 });
+
+if (process.platform === "darwin") {
+  app.dock.hide();
+}
