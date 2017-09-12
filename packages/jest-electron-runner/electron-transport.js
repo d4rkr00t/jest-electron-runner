@@ -3,7 +3,7 @@ const minimist = require("minimist");
 
 const args = minimist(process.argv.slice(2));
 
-function run(file, config) {
+function run() {
   let runner = new BrowserWindow({
     title: "Jest",
     show: false,
@@ -11,22 +11,26 @@ function run(file, config) {
   });
 
   ipcMain.on("test-results", (evt, result) => {
-    console.log(JSON.stringify({ type: "result", data: result }));
+    process.send({ type: "result", data: result });
   });
 
   ipcMain.on("error", (evt, error) => {
-    console.log(JSON.stringify({ type: "error", data: error }));
+    process.send({ type: "error", data: error });
   });
 
   runner.loadURL(`file://${__dirname}/runner.html`);
 
-  runner.webContents.on("did-finish-load", () => {
-    runner.webContents.send("run", {
-      file: args.file,
-      globalConfig: JSON.parse(args.globalConfig),
-      config: JSON.parse(args.config)
+  process.on("message", msg => {
+    runner.webContents.on("did-finish-load", () => {
+      runner.webContents.send("run", {
+        file: msg.file,
+        globalConfig: msg.globalConfig,
+        config: msg.config
+      });
     });
   });
+
+  process.send({ type: "ready" });
 }
 
 app.on("ready", run);

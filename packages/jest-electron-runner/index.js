@@ -1,7 +1,8 @@
 const path = require("path");
-const spawn = require("projector-spawn");
+const spawn = require("child_process").spawn;
+const electron = require("electron");
 const throat = require("throat");
-const { formatResultsErrors } = require("jest-message-util");
+const supportsColor = require("supports-color");
 
 class ElectronTestRunner {
   constructor(globalConfig) {
@@ -19,33 +20,34 @@ class ElectronTestRunner {
                 throw new CancelRun();
               }
 
+              const env = Object.assign({}, process.env, {
+                FORCE_COLOR: supportsColor.level
+              });
+
               onStart(test)
                 .then(() =>
-                  spawn("electron", [
-                    path.join(__dirname, "electron-transport.js"),
-                    "--file",
-                    test.path,
-                    "--globalConfig",
-                    JSON.stringify(this._globalConfig),
-                    "--config",
-                    JSON.stringify(test.context.config)
-                  ])
+                  spawn(
+                    electron,
+                    [path.join(__dirname, "electron-transport.js")],
+                    { stdio: ["ipc"], env }
+                  )
                 )
-                .then(({ stdout }) => {
-                  const result = JSON.parse(stdout);
-                  if (result.type === "error") {
-                    return reject(new Error(result.data));
-                  }
+                .then(electron => {
+                  electron.on("message", message => {
+                    if (message.type === "ready") {
+                      return electron.send({
+                        file: test.path,
+                        globalConfig: this._globalConfig,
+                        config: test.context.config
+                      });
+                    }
 
-                  const data = result.data;
-                  data.failureMessage = formatResultsErrors(
-                    data.testResults,
-                    test.context.config,
-                    this._globalConfig,
-                    test.path
-                  );
+                    if (message.type === "error") {
+                      return reject(new Error(message.data));
+                    }
 
-                  return resolve(data);
+                    resolve(message.data);
+                  });
                 })
                 .catch(e => {
                   reject(e);
@@ -62,6 +64,3 @@ class ElectronTestRunner {
 class CancelRun extends Error {}
 
 module.exports = ElectronTestRunner;
-
-// TODO: Readme and Example
-// TODO: Coverage
