@@ -33,6 +33,10 @@ class ElectronTestRunner {
                   )
                 )
                 .then(electron => {
+                  process.on("exit", code => {
+                    electron.kill();
+                  });
+
                   electron.on("message", message => {
                     if (message.type === "ready") {
                       return electron.send({
