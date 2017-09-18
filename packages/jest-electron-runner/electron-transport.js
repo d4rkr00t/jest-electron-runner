@@ -11,11 +11,15 @@ function run() {
   });
 
   ipcMain.on("test-results", (evt, result) => {
-    process.send({ type: "result", data: result });
+    try {
+      process.send({ type: "result", data: result });
+    } catch (e) {}
   });
 
   ipcMain.on("error", (evt, error) => {
-    process.send({ type: "error", data: error });
+    try {
+      process.send({ type: "error", data: error });
+    } catch (e) {}
   });
 
   runner.loadURL(`file://${__dirname}/runner.html`);
